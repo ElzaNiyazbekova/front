@@ -1,0 +1,99 @@
+<!-- src/app/components/home/home.component.html -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text fade-in">
+        <p class="hero-eyebrow">Discover your city</p>
+        <h1 class="hero-title">Every corner<br><em>has a story.</em></h1>
+        <p class="hero-sub">Find the hidden gems, family spots, and local favourites near you.</p>
+
+        <!-- [(ngModel)] form control #1 — hero search -->
+        <div class="hero-search">
+          <input
+            class="form-control search-input"
+            type="text"
+            placeholder="Search by city…"
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+          />
+          <!-- (click) event #1 -->
+          <button class="btn btn-primary search-btn" (click)="onSearch()">Search</button>
+        </div>
+      </div>
+      <div class="hero-visual fade-in">
+        <div class="hero-card-stack">
+          <div class="hc hc-1">◈ Museum District</div>
+          <div class="hc hc-2">◈ Green Market</div>
+          <div class="hc hc-3">◈ Night Quarter</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="recent-section section">
+  <div class="container">
+    <div class="section-head">
+      <h2>Recently Added</h2>
+      <!-- (click) event #2 -->
+      <button class="btn btn-outline btn-sm" (click)="goToLocations()">View all →</button>
+    </div>
+
+    @if (loading) {
+      <div class="spinner-wrap"><div class="spinner"></div></div>
+    } @else if (recentLocations.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">🗺️</div>
+        <h3>No locations yet</h3>
+        <p>Be the first to add a spot!</p>
+        @if (auth.isLoggedIn) {
+          <a routerLink="/locations/new" class="btn btn-primary" style="margin-top:16px">Add Location</a>
+        }
+      </div>
+    } @else {
+      <div class="grid-3">
+        @for (loc of recentLocations; track loc.id) {
+          <div class="card location-card" routerLink="/locations/{{ loc.id }}">
+            <div class="loc-img-wrap">
+              @if (loc.image) {
+                <img [src]="loc.image" [alt]="loc.name" class="loc-img" />
+              } @else {
+                <div class="loc-img-placeholder">◈</div>
+              }
+              @if (loc.category_name) {
+                <span class="loc-badge">{{ loc.category_name }}</span>
+              }
+            </div>
+            <div class="card-body">
+              <h3 class="loc-name">{{ loc.name }}</h3>
+              <p class="loc-city">📍 {{ loc.city }}</p>
+              <p class="loc-desc">{{ loc.description | slice:0:90 }}{{ loc.description.length > 90 ? '…' : '' }}</p>
+              @if (loc.average_rating) {
+                <div class="loc-rating">
+                  <span class="stars">{{ getStars(loc.average_rating) }}</span>
+                  <span class="rating-val">{{ loc.average_rating | number:'1.1-1' }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <div>
+        <h2>Know a great spot?</h2>
+        <p>Share it with the community and help others discover your city.</p>
+      </div>
+      @if (auth.isLoggedIn) {
+        <a routerLink="/locations/new" class="btn btn-primary">Add a Location</a>
+      } @else {
+        <a routerLink="/register" class="btn btn-primary">Join UrbanLens</a>
+      }
+    </div>
+  </div>
+</section>

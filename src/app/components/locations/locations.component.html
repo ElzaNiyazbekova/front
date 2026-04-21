@@ -1,0 +1,101 @@
+<!-- src/app/components/locations/locations.component.html -->
+<div class="container">
+  <div class="page-header">
+    <div class="page-header-inner">
+      <div>
+        <h1>Locations</h1>
+        <p>Browse and discover places by category</p>
+      </div>
+      @if (isAdmin) {
+        <a routerLink="/locations/new" class="btn btn-primary">+ Add Location</a>
+      } @else {
+        <p class="text-muted">Only admins can add locations</p>
+      }
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar card card-body">
+    <div class="filter-row">
+      <!-- [(ngModel)] form control #6 — category filter -->
+      <div class="filter-group">
+        <label class="form-label">Category</label>
+        <select class="form-control" [(ngModel)]="filterCategory" name="filterCategory">
+          <option value="">All categories</option>
+          @for (cat of categories; track cat.id) {
+            <option [value]="cat.name">{{ cat.name }}</option>
+          }
+        </select>
+      </div>
+
+      <!-- [(ngModel)] form control #7 — target group filter -->
+      <div class="filter-group">
+        <label class="form-label">Target Group</label>
+        <select class="form-control" [(ngModel)]="filterTargetGroup" name="filterTargetGroup">
+          <option value="">All groups</option>
+          @for (tg of targetGroups; track tg.id) {
+            <option [value]="tg.name">{{ tg.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <!-- (click) event #5 -->
+        <button class="btn btn-primary" (click)="applyFilters()">Apply</button>
+        <!-- (click) event #6 -->
+        <button class="btn btn-ghost" (click)="clearFilters()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error -->
+  @if (errorMessage) {
+    <div class="alert alert-error">{{ errorMessage }}</div>
+  }
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="spinner-wrap"><div class="spinner"></div><p>Loading locations…</p></div>
+  }
+
+  <!-- Results -->
+  @if (!loading) {
+    @if (locations.length === 0) {
+      <div class="empty-state">
+        <div class="empty-icon">🗺️</div>
+        <h3>No locations found</h3>
+        <p>Try clearing the filters or add a new location.</p>
+      </div>
+    } @else {
+      <p class="results-count">{{ locations.length }} location{{ locations.length !== 1 ? 's' : '' }} found</p>
+      <div class="grid-3 fade-in">
+        @for (loc of locations; track loc.id) {
+          <!-- (click) event #7 -->
+          <div class="card location-card" (click)="viewLocation(loc.id)">
+            <div class="loc-img-wrap">
+              @if (loc.image) {
+                <img [src]="loc.image" [alt]="loc.name" class="loc-img" />
+              } @else {
+                <div class="loc-img-placeholder">◈</div>
+              }
+              <span class="loc-badge">{{ getCategoryName(loc.category) || loc.category_name }}</span>
+            </div>
+            <div class="card-body">
+              <h3 class="loc-name">{{ loc.name }}</h3>
+              <p class="loc-city">📍 {{ loc.city }}</p>
+              <p class="loc-desc">{{ loc.description | slice:0:100 }}{{ loc.description.length > 100 ? '…' : '' }}</p>
+              <div class="loc-footer">
+                @if (loc.average_rating) {
+                  <span class="stars">{{ getStars(loc.average_rating) }}</span>
+                }
+                @if (loc.target_group_name) {
+                  <span class="badge badge-accent">{{ loc.target_group_name }}</span>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

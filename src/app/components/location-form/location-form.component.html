@@ -1,0 +1,137 @@
+<!-- src/app/components/location-form/location-form.component.html -->
+<div class="container form-page">
+  <div class="page-header">
+    <h1>@if (isEditMode) { Edit Location } @else { Add New Location }</h1>
+    <p>@if (isEditMode) { Update the location details below. } @else { Share a great spot with the community. }</p>
+  </div>
+
+  @if (loading) {
+    <div class="spinner-wrap"><div class="spinner"></div></div>
+  } @else {
+    <div class="form-card card card-body fade-in">
+
+      @if (errorMessage) {
+        <div class="alert alert-error">{{ errorMessage }}</div>
+      }
+
+      <!-- [(ngModel)] form control #9 — name -->
+      <div class="form-group">
+        <label class="form-label" for="name">Location Name <span class="required">*</span></label>
+        <input
+          id="name"
+          type="text"
+          class="form-control"
+          placeholder="e.g. Central Park Café"
+          [(ngModel)]="name"
+          name="name"
+          maxlength="200"
+        />
+      </div>
+
+      <!-- [(ngModel)] form control #10 — city -->
+      <div class="form-group">
+        <label class="form-label" for="city">City <span class="required">*</span></label>
+        <select
+          id="city"
+          class="form-control"
+          [(ngModel)]="city"
+          name="city"
+        >
+          <option value="">Select a city…</option>
+          <option value="Almaty">Almaty</option>
+          <option value="Astana">Astana</option>
+          <option value="Shymkent">Shymkent</option>
+          <option value="Karaganda">Karaganda</option>
+          <option value="Aktobe">Aktobe</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <!-- [(ngModel)] form control #11 — category -->
+        <div class="form-group">
+          <label class="form-label" for="category">Category <span class="required">*</span></label>
+          <select
+            id="category"
+            class="form-control"
+            [(ngModel)]="categoryId"
+            name="categoryId"
+          >
+            <option value="">Select a category…</option>
+            @for (cat of categories; track cat.id) {
+              <option [value]="cat.id">{{ cat.name }}</option>
+            }
+          </select>
+        </div>
+
+        <!-- [(ngModel)] form control #12 — target group -->
+        <div class="form-group">
+          <label class="form-label" for="targetGroup">Target Group</label>
+          <select
+            id="targetGroup"
+            class="form-control"
+            [(ngModel)]="targetGroupId"
+            name="targetGroupId"
+          >
+            <option value="">Any / not specified</option>
+            @for (tg of targetGroups; track tg.id) {
+              <option [value]="tg.id">{{ tg.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- [(ngModel)] form control #13 — description -->
+      <div class="form-group">
+        <label class="form-label" for="description">Description <span class="required">*</span></label>
+        <textarea
+          id="description"
+          class="form-control"
+          rows="6"
+          placeholder="Describe what makes this place special…"
+          [(ngModel)]="description"
+          name="description"
+        ></textarea>
+      </div>
+
+      <!-- Image upload -->
+      <div class="form-group">
+        <label class="form-label" for="image">Location Image</label>
+        <input
+          id="image"
+          type="file"
+          class="form-control"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          name="image"
+        />
+        @if (selectedFile) {
+          <div class="file-preview">
+            <small>Selected: {{ selectedFile.name }}</small>
+          </div>
+        }
+      </div>
+
+      <!-- Validation summary -->
+      @if (!isValid() && (name || description || city || categoryId)) {
+        <p class="validation-hint">* Required fields must be filled in.</p>
+      }
+
+      <div class="form-actions">
+        <button class="btn btn-ghost" (click)="onCancel()">Cancel</button>
+        <button
+          class="btn btn-primary"
+          (click)="onSave()"
+          [disabled]="saving || !isValid()"
+        >
+          @if (saving) {
+            Saving…
+          } @else if (isEditMode) {
+            Save Changes
+          } @else {
+            Create Location
+          }
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,91 @@
+<!-- src/app/components/register/register.component.html -->
+<div class="auth-page">
+  <div class="auth-card card fade-in">
+    <div class="auth-header">
+      <span class="auth-logo">◈</span>
+      <h1>Create account</h1>
+      <p>Join UrbanLens and share your discoveries</p>
+    </div>
+
+    <div class="card-body">
+      @if (errorMessage) {
+        <div class="alert alert-error">{{ errorMessage }}</div>
+      }
+
+      <!-- [(ngModel)] form control #2 — username -->
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input
+          type="text" class="form-control"
+          placeholder="choose_a_username"
+          [(ngModel)]="username"
+          name="username"
+        />
+      </div>
+
+      <!-- [(ngModel)] form control #3 — email -->
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          type="email" class="form-control"
+          placeholder="you@example.com"
+          [(ngModel)]="email"
+          name="email"
+        />
+      </div>
+
+      <!-- [(ngModel)] form control #4 — password -->
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input
+          type="password" class="form-control"
+          placeholder="Min. 8 characters"
+          [(ngModel)]="password"
+          name="password"
+        />
+      </div>
+
+      <!-- [(ngModel)] form control #5 — confirm password -->
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input
+          type="password" class="form-control"
+          placeholder="Repeat password"
+          [(ngModel)]="password2"
+          name="password2"
+          (keyup.enter)="onRegister()"
+        />
+      </div>
+            <!-- Radio buttons for user type -->
+      <div class="form-group">
+        <label class="form-label">Account Type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="isAdmin" [value]="false" name="userType" />
+            Regular User (view locations, write reviews)
+          </label>
+          <label class="radio-label">
+            <input type="radio" [(ngModel)]="isAdmin" [value]="true" name="userType" />
+            Admin (can add/edit locations)
+          </label>
+        </div>
+      </div>
+
+      <!-- (click) event #4 -->
+      <button
+        class="btn btn-primary btn-block"
+        (click)="onRegister()"
+        [disabled]="loading"
+      >
+        @if (loading) { Creating account… } @else { Create account }
+      </button>
+
+      <hr class="divider" />
+
+      <p class="auth-switch">
+        Already have an account?
+        <a routerLink="/login">Sign in →</a>
+      </p>
+    </div>
+  </div>
+</div>

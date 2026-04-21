@@ -1,0 +1,73 @@
+<!-- src/app/components/reviews/reviews.component.html -->
+
+<!-- Write a review form -->
+<div class="review-form card card-body">
+  <h3>Leave a Review</h3>
+
+  @if (errorMessage) {
+    <div class="alert alert-error">{{ errorMessage }}</div>
+  }
+  @if (successMessage) {
+    <div class="alert alert-success">{{ successMessage }}</div>
+  }
+
+  <!-- Star rating picker -->
+  <div class="form-group">
+    <label class="form-label">Rating</label>
+    <div class="star-picker">
+      @for (star of [1,2,3,4,5]; track star) {
+        <button
+          class="star-btn"
+          [class.filled]="star <= newRating"
+          (click)="setRating(star)"
+          type="button"
+        >★</button>
+      }
+      <span class="rating-label">{{ newRating }} / 5</span>
+    </div>
+  </div>
+
+  <!-- [(ngModel)] form control #8 — review text -->
+  <div class="form-group">
+    <label class="form-label">Your Review</label>
+    <textarea
+      class="form-control"
+      rows="4"
+      placeholder="Share your experience…"
+      [(ngModel)]="newText"
+      name="reviewText"
+    ></textarea>
+  </div>
+
+  <button
+    class="btn btn-primary"
+    (click)="submitReview()"
+    [disabled]="submitting"
+  >
+    @if (submitting) { Posting… } @else { Post Review }
+  </button>
+</div>
+
+<!-- Existing reviews -->
+@if (reviews.length > 0) {
+  <div class="reviews-list">
+    @for (review of reviews; track review.id) {
+      <div class="review-card card card-body">
+        <div class="review-header">
+          <div class="reviewer-info">
+            <span class="reviewer-avatar">👤</span>
+            <strong>{{ review.username || 'User #' + review.user }}</strong>
+          </div>
+          <span class="stars">{{ getStars(review.rating) }}</span>
+          <span class="review-date">{{ review.created_at | date:'mediumDate' }}</span>
+          @if (canDelete(review)) {
+            <button class="btn btn-ghost btn-sm delete-btn" (click)="deleteReview(review.id)">✕</button>
+          }
+        </div>
+        <p class="review-text">{{ review.text }}</p>
+      </div>
+    }
+  </div>
+} @else {
+  <p class="no-reviews">No reviews yet — be the first!</p>
+}

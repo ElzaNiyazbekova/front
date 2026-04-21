@@ -1,0 +1,135 @@
+<!-- src/app/components/location-detail/location-detail.component.html -->
+<div class="container detail-page">
+
+  @if (loading) {
+    <div class="spinner-wrap"><div class="spinner"></div></div>
+  }
+
+  @if (errorMessage && !location) {
+    <div class="alert alert-error" style="margin-top:40px">{{ errorMessage }}</div>
+  }
+
+  @if (location) {
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a routerLink="/locations">← All Locations</a>
+      <span>/</span>
+      <span>{{ location.name }}</span>
+    </nav>
+
+    <div class="detail-layout fade-in">
+      <!-- Main content -->
+      <div class="detail-main">
+        <div class="detail-img-wrap card">
+          @if (location.image) {
+            <img [src]="location.image" [alt]="location.name" class="detail-img" />
+          } @else {
+            <div class="detail-img-placeholder">◈</div>
+          }
+        </div>
+
+        <!-- Reviews section -->
+        <div class="reviews-section">
+          <h2>Reviews <span class="review-count">({{ reviews.length }})</span></h2>
+
+          @if (auth.isLoggedIn) {
+            <app-reviews
+              [locationId]="location.id"
+              (reviewAdded)="onReviewAdded($event)"
+              (reviewDeleted)="onReviewDeleted($event)"
+              [reviews]="reviews"
+              [currentUserId]="auth.currentUser?.id"
+            ></app-reviews>
+          } @else {
+            <div class="login-prompt">
+              <a routerLink="/login">Sign in</a> to leave a review.
+            </div>
+          }
+
+          @if (!auth.isLoggedIn && reviews.length > 0) {
+            <div class="reviews-list">
+              @for (review of reviews; track review.id) {
+                <div class="review-card card card-body">
+                  <div class="review-header">
+                    <strong>{{ review.username || 'User #' + review.user }}</strong>
+                    <span class="stars" style="color:var(--gold)">{{ getStars(review.rating) }}</span>
+                    <span class="review-date">{{ review.created_at | date:'mediumDate' }}</span>
+                  </div>
+                  <p class="review-text">{{ review.text }}</p>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="detail-sidebar">
+        <div class="sidebar-card card card-body">
+          <span class="loc-badge-detail">{{ location.category_name }}</span>
+          <h1 class="detail-title">{{ location.name }}</h1>
+          <p class="detail-city">📍 {{ location.city }}</p>
+
+          @if (reviews.length > 0) {
+            <div class="avg-rating">
+              <span class="stars">{{ getStars(+averageRating) }}</span>
+              <span class="avg-val">{{ averageRating }} / 5</span>
+              <span class="avg-count">({{ reviews.length }} review{{ reviews.length !== 1 ? 's' : '' }})</span>
+            </div>
+          }
+
+          <hr class="divider" />
+          <p class="detail-desc">{{ location.description }}</p>
+
+          @if (location.target_group_name) {
+            <div class="detail-meta">
+              <span class="meta-label">Target group</span>
+              <span class="badge badge-accent">{{ location.target_group_name }}</span>
+            </div>
+          }
+
+          <div class="detail-meta">
+            <span class="meta-label">Added by</span>
+            <span>{{ location.created_by_username || 'Unknown' }}</span>
+          </div>
+
+          <hr class="divider" />
+
+          <!-- Favourite button -->
+          @if (auth.isLoggedIn) {
+            <!-- (click) event #8 -->
+            <button
+              class="btn btn-block"
+              [class.btn-primary]="!isFavorited"
+              [class.btn-outline]="isFavorited"
+              (click)="toggleFavorite()"
+            >
+              @if (isFavorited) { ♥ Remove from Favourites } @else { ♡ Add to Favourites }
+            </button>
+          }
+
+          <!-- Owner actions -->
+          @if (isOwner || auth.currentUser?.id === 1) {
+            <div class="owner-actions">
+              <a
+                [routerLink]="['/locations', location.id, 'edit']"
+                class="btn btn-ghost btn-block"
+              >Edit Location</a>
+
+              <!-- (click) event #9 — delete with confirm -->
+              @if (!deleteConfirm) {
+                <button class="btn btn-danger btn-block" (click)="deleteLocation()">Delete Location</button>
+              } @else {
+                <button class="btn btn-danger btn-block" (click)="deleteLocation()">⚠ Confirm Delete</button>
+              }
+            </div>
+          }
+
+          @if (errorMessage && location) {
+            <div class="alert alert-error" style="margin-top:12px">{{ errorMessage }}</div>
+          }
+        </div>
+      </aside>
+    </div>
+  }
+</div>

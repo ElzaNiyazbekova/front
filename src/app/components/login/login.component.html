@@ -1,0 +1,61 @@
+<!-- src/app/components/login/login.component.html -->
+<div class="auth-page">
+  <div class="auth-card card fade-in">
+    <div class="auth-header">
+      <span class="auth-logo">◈</span>
+      <h1>Welcome back</h1>
+      <p>Sign in to your UrbanLens account</p>
+    </div>
+
+    <div class="card-body">
+      @if (errorMessage) {
+        <div class="alert alert-error">{{ errorMessage }}</div>
+      }
+
+      <!-- [(ngModel)] form control #2 — username -->
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input
+          id="username"
+          type="text"
+          class="form-control"
+          placeholder="your_username"
+          [(ngModel)]="username"
+          name="username"
+          autocomplete="username"
+        />
+      </div>
+
+      <!-- [(ngModel)] form control #3 — password -->
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          class="form-control"
+          placeholder="••••••••"
+          [(ngModel)]="password"
+          name="password"
+          autocomplete="current-password"
+          (keyup.enter)="onLogin()"
+        />
+      </div>
+
+      <!-- (click) event #3 -->
+      <button
+        class="btn btn-primary btn-block"
+        (click)="onLogin()"
+        [disabled]="loading"
+      >
+        @if (loading) { Signing in… } @else { Sign in }
+      </button>
+
+      <hr class="divider" />
+
+      <p class="auth-switch">
+        Don't have an account?
+        <a routerLink="/register">Create one →</a>
+      </p>
+    </div>
+  </div>
+</div>

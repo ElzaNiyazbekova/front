@@ -1,0 +1,52 @@
+/* src/app/components/location-form/location-form.component.css */
+.form-page {
+  padding-bottom: 80px;
+}
+
+.page-header {
+  padding: 40px 0 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.page-header h1 { font-size: 2rem; }
+.page-header p { color: var(--ink-light); margin-top: 6px; }
+
+.form-card {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 36px 40px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.required {
+  color: var(--accent);
+}
+
+.validation-hint {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-bottom: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.form-actions .btn-primary {
+  padding: 11px 32px;
+}
+
+@media (max-width: 600px) {
+  .form-card { padding: 24px 20px; }
+  .form-row { grid-template-columns: 1fr; }
+}

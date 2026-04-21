@@ -1,0 +1,115 @@
+/* src/app/components/home/home.component.css */
+.hero {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 80px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 70% 50%, rgba(200,98,42,.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+
+.hero-eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent-light);
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.1; color: var(--cream);
+  margin-bottom: 20px;
+}
+.hero-title em { color: var(--accent-light); font-style: italic; }
+.hero-sub { color: rgba(247,244,238,.7); font-size: 1.05rem; margin-bottom: 36px; }
+
+.hero-search {
+  display: flex; gap: 10px; max-width: 440px;
+}
+.search-input {
+  background: rgba(255,255,255,.1) !important;
+  border-color: rgba(255,255,255,.2) !important;
+  color: var(--cream) !important;
+  flex: 1;
+}
+.search-input::placeholder { color: rgba(247,244,238,.5); }
+.search-input:focus { border-color: var(--accent-light) !important; }
+
+/* Hero visual / card stack */
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-card-stack { position: relative; width: 260px; height: 200px; }
+.hc {
+  position: absolute;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-lg);
+  padding: 14px 20px;
+  font-size: 14px; font-weight: 500;
+  color: var(--cream);
+  white-space: nowrap;
+}
+.hc-1 { top: 0; left: 20px; transform: rotate(-4deg); z-index: 3; }
+.hc-2 { top: 60px; left: 0; transform: rotate(2deg); z-index: 2; background: rgba(200,98,42,.2); }
+.hc-3 { top: 118px; left: 30px; transform: rotate(-1deg); z-index: 1; }
+
+/* Section header */
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 32px;
+}
+.section-head h2 { font-size: 1.8rem; }
+
+/* Location card */
+.location-card { cursor: pointer; }
+.loc-img-wrap { position: relative; height: 180px; background: var(--surface-alt); overflow: hidden; }
+.loc-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.location-card:hover .loc-img { transform: scale(1.05); }
+.loc-img-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem; color: var(--border);
+}
+.loc-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--surface); color: var(--accent);
+  font-size: 11px; font-weight: 600; letter-spacing: .4px;
+  padding: 3px 10px; border-radius: 20px;
+  text-transform: uppercase;
+}
+.loc-name { font-size: 1.05rem; margin-bottom: 4px; }
+.loc-city { font-size: 13px; color: var(--ink-light); margin-bottom: 8px; }
+.loc-desc { font-size: 13px; color: var(--ink-light); line-height: 1.5; margin-bottom: 12px; }
+.loc-rating { display: flex; align-items: center; gap: 6px; }
+.stars { color: var(--gold); }
+.rating-val { font-size: 13px; color: var(--ink-light); }
+
+/* CTA */
+.cta-section {
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  padding: 60px 0;
+}
+.cta-inner {
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 32px;
+}
+.cta-inner h2 { font-size: 1.8rem; margin-bottom: 8px; }
+.cta-inner p { color: var(--ink-light); }
+
+.recent-section { padding-top: 60px; }
+
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .cta-inner { flex-direction: column; text-align: center; }
+}

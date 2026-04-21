@@ -1,0 +1,32 @@
+<!-- src/app/components/navbar/navbar.component.html -->
+<nav class="navbar">
+  <div class="nav-inner container">
+    <a class="nav-brand" routerLink="/home">
+      <span class="brand-icon">◈</span>
+      <span class="brand-text">UrbanLens</span>
+    </a>
+
+    <ul class="nav-links" [class.open]="menuOpen">
+      <li><a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="menuOpen=false">Home</a></li>
+      <li><a routerLink="/locations" routerLinkActive="active" (click)="menuOpen=false">Locations</a></li>
+      @if (auth.isLoggedIn) {
+        <li><a routerLink="/favorites" routerLinkActive="active" (click)="menuOpen=false">Favourites</a></li>
+        <li><a routerLink="/locations/new" routerLinkActive="active" (click)="menuOpen=false" class="nav-cta">+ Add Location</a></li>
+      }
+    </ul>
+
+    <div class="nav-auth">
+      @if (auth.isLoggedIn) {
+        <span class="nav-user">👤 {{ currentUser?.username }}</span>
+        <button class="btn btn-ghost btn-sm" (click)="logout()">Sign out</button>
+      } @else {
+        <a routerLink="/login" class="btn btn-ghost btn-sm">Sign in</a>
+        <a routerLink="/register" class="btn btn-primary btn-sm">Register</a>
+      }
+    </div>
+
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>

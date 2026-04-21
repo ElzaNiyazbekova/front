@@ -1,0 +1,87 @@
+/* src/app/components/favorites/favorites.component.css */
+.page-header {
+  padding: 40px 0 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.page-header h1 { font-size: 2.2rem; }
+.page-header p { color: var(--ink-light); margin-top: 6px; }
+
+.fav-count {
+  font-size: 13px;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+}
+
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding-bottom: 80px;
+}
+
+.fav-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.fav-img-placeholder {
+  height: 140px;
+  background: var(--surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: var(--border);
+}
+
+.fav-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.fav-name {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.fav-city {
+  font-size: 13px;
+  color: var(--ink-light);
+}
+
+.fav-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.fav-go {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.fav-remove {
+  font-size: 12px;
+  color: var(--danger);
+  border-color: var(--danger);
+  white-space: nowrap;
+}
+
+.fav-remove:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.empty-state .empty-icon {
+  font-size: 3.5rem;
+  color: var(--accent-light);
+}

@@ -1,0 +1,55 @@
+<!-- src/app/components/favorites/favorites.component.html -->
+<div class="container">
+  <div class="page-header">
+    <h1>My Favourites</h1>
+    <p>Locations you've saved for later</p>
+  </div>
+
+  @if (errorMessage) {
+    <div class="alert alert-error">{{ errorMessage }}</div>
+  }
+
+  @if (loading) {
+    <div class="spinner-wrap">
+      <div class="spinner"></div>
+      <p>Loading your favourites…</p>
+    </div>
+  } @else if (favorites.length === 0) {
+    <div class="empty-state fade-in">
+      <div class="empty-icon">♡</div>
+      <h3>No favourites yet</h3>
+      <p>Browse locations and tap the heart to save them here.</p>
+      <a routerLink="/locations" class="btn btn-primary" style="margin-top:20px">Browse Locations</a>
+    </div>
+  } @else {
+    <p class="fav-count">{{ favorites.length }} saved location{{ favorites.length !== 1 ? 's' : '' }}</p>
+
+    <div class="fav-grid fade-in">
+      @for (fav of favorites; track fav.id) {
+        <div class="fav-card card" (click)="viewLocation(fav.location)">
+          <div class="fav-img-placeholder">◈</div>
+          <div class="fav-body card-body">
+            <div class="fav-info">
+              <h3 class="fav-name">{{ fav.location_name || 'Location #' + fav.location }}</h3>
+              @if (fav.location_city) {
+                <p class="fav-city">📍 {{ fav.location_city }}</p>
+              }
+            </div>
+            <div class="fav-actions">
+              <span class="fav-go">View →</span>
+              <!-- (click) event — remove favourite -->
+              <button
+                class="btn btn-ghost btn-sm fav-remove"
+                (click)="removeFavorite(fav, $event)"
+                [disabled]="removingId === fav.id"
+                title="Remove from favourites"
+              >
+                @if (removingId === fav.id) { … } @else { ♥ Remove }
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

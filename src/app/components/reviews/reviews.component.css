@@ -1,0 +1,94 @@
+/* src/app/components/reviews/reviews.component.css */
+.review-form {
+  margin-bottom: 24px;
+}
+.review-form h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+/* Star picker */
+.star-picker {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: var(--border);
+  cursor: pointer;
+  padding: 0 2px;
+  transition: color var(--transition), transform var(--transition);
+  line-height: 1;
+}
+.star-btn.filled {
+  color: var(--gold);
+}
+.star-btn:hover {
+  transform: scale(1.2);
+  color: var(--gold);
+}
+.rating-label {
+  font-size: 13px;
+  color: var(--ink-light);
+  margin-left: 8px;
+}
+
+/* Reviews list */
+.reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.review-card {
+  padding: 16px 20px;
+}
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reviewer-avatar {
+  font-size: 1rem;
+}
+.stars {
+  color: var(--gold);
+  font-size: 0.9rem;
+}
+.review-date {
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-left: auto;
+}
+.delete-btn {
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.delete-btn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+.review-text {
+  font-size: 14px;
+  color: var(--ink-light);
+  line-height: 1.65;
+  margin: 0;
+}
+.no-reviews {
+  color: var(--ink-light);
+  font-size: 14px;
+  padding: 16px 0;
+  font-style: italic;
+}
