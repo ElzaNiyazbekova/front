@@ -112,7 +112,7 @@
       </div>
 
       <!-- Validation summary -->
-      @if (!isValid() && (name || description || city || categoryId)) {
+      @if ( (name || description || city || categoryId)) {
         <p class="validation-hint">* Required fields must be filled in.</p>
       }
 
@@ -121,7 +121,7 @@
         <button
           class="btn btn-primary"
           (click)="onSave()"
-          [disabled]="saving || !isValid()"
+          [disabled]="saving "
         >
           @if (saving) {
             Saving…

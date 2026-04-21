@@ -27,7 +27,11 @@
     <div class="fav-grid fade-in">
       @for (fav of favorites; track fav.id) {
         <div class="fav-card card" (click)="viewLocation(fav.location)">
-          <div class="fav-img-placeholder">◈</div>
+          @if (fav.location_image) {
+            <img [src]="fav.location_image" [alt]="fav.location_name || 'Favourite location'" class="fav-img" />
+          } @else {
+            <div class="fav-img-placeholder">◈</div>
+          }
           <div class="fav-body card-body">
             <div class="fav-info">
               <h3 class="fav-name">{{ fav.location_name || 'Location #' + fav.location }}</h3>

@@ -27,6 +27,13 @@
   transition: box-shadow var(--transition), transform var(--transition);
 }
 
+.fav-img {
+  height: 140px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .fav-img-placeholder {
   height: 140px;
   background: var(--surface-alt);

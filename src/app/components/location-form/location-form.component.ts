@@ -64,17 +64,17 @@ export class LocationFormComponent implements OnInit {
     }
   }
 
-  isValid(): boolean {
-    return !!(this.name.trim() && this.description.trim() && this.city && this.categoryId);
-  }
+  // isValid(): boolean {
+  //   return !!(this.name.trim() && this.description.trim() && this.city && this.categoryId);
+  // }
 
   // (click) event — save location (create or update)
   onSave(): void {
     this.errorMessage = '';
-    if (!this.isValid()) {
-      this.errorMessage = 'Please fill in all required fields.';
-      return;
-    }
+    // if (!this.isValid()) {
+    //   this.errorMessage = 'Please fill in all required fields.';
+    //   return;
+    // }
 
     const formData = new FormData();
     formData.append('name', this.name.trim());

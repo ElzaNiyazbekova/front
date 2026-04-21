@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["angular:styles/component:css;b22b5d9120e7aee3d3d63b17c29e12ecfcb9d61e4cdbdcb787452f6a918808c5;/Users/elzaniyazbekova/Desktop/Web-dev proj/angular-frontend/src/app/app.component.ts"],
+  "sourcesContent": ["\n    .main-content { min-height: calc(100vh - 64px); }\n  "],
+  "mappings": ";AACI,CAAC;AAAe,cAAY,KAAK,MAAM,EAAE;AAAO;",
+  "names": []
+}

@@ -28,10 +28,9 @@ export class LocationsComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  isAdmin = false;
+  
 
   ngOnInit(): void {
-    this.isAdmin = !!localStorage.getItem('is_admin');
     this.route.queryParams.subscribe(params => {
       this.filterCategory = params['category'] || '';
       this.filterTargetGroup = params['target_group'] || '';

@@ -6,11 +6,8 @@
         <h1>Locations</h1>
         <p>Browse and discover places by category</p>
       </div>
-      @if (isAdmin) {
-        <a routerLink="/locations/new" class="btn btn-primary">+ Add Location</a>
-      } @else {
-        <p class="text-muted">Only admins can add locations</p>
-      }
+      <a routerLink="/locations/new" class="btn btn-primary">+ Add Location</a>
+
     </div>
   </div>
 

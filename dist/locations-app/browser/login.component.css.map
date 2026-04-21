@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/components/login/login.component.css"],
+  "sourcesContent": ["/* src/app/components/login/login.component.css */\n.auth-page {\n  min-height: calc(100vh - 64px);\n  display: flex; align-items: center; justify-content: center;\n  padding: 40px 16px;\n  background: var(--cream);\n}\n.auth-card {\n  width: 100%; max-width: 420px;\n}\n.auth-header {\n  text-align: center; padding: 36px 32px 0;\n}\n.auth-logo {\n  font-size: 2rem; color: var(--accent); display: block; margin-bottom: 12px;\n}\n.auth-header h1 { font-size: 1.8rem; margin-bottom: 8px; }\n.auth-header p { color: var(--ink-light); font-size: 14px; }\n.card-body { padding: 28px 32px 32px; }\n.btn-block { width: 100%; justify-content: center; padding: 12px; font-size: 15px; }\n.auth-switch { text-align: center; font-size: 14px; color: var(--ink-light); }\n.auth-switch a { font-weight: 500; }\n"],
+  "mappings": ";AACA,CAAC;AACC,cAAY,KAAK,MAAM,EAAE;AACzB,WAAS;AAAM,eAAa;AAAQ,mBAAiB;AACrD,WAAS,KAAK;AACd,cAAY,IAAI;AAClB;AACA,CAAC;AACC,SAAO;AAAM,aAAW;AAC1B;AACA,CAAC;AACC,cAAY;AAAQ,WAAS,KAAK,KAAK;AACzC;AACA,CAAC;AACC,aAAW;AAAM,SAAO,IAAI;AAAW,WAAS;AAAO,iBAAe;AACxE;AACA,CANC,YAMY;AAAK,aAAW;AAAQ,iBAAe;AAAK;AACzD,CAPC,YAOY;AAAI,SAAO,IAAI;AAAc,aAAW;AAAM;AAC3D,CAAC;AAAY,WAAS,KAAK,KAAK;AAAM;AACtC,CAAC;AAAY,SAAO;AAAM,mBAAiB;AAAQ,WAAS;AAAM,aAAW;AAAM;AACnF,CAAC;AAAc,cAAY;AAAQ,aAAW;AAAM,SAAO,IAAI;AAAc;AAC7E,CADC,YACY;AAAI,eAAa;AAAK;",
+  "names": []
+}
